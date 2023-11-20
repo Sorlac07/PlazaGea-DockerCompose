@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.scss";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
+import ProductList from "./components/ProductList";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class App extends React.Component {
 
     this.state = {
       todos: [],
-
+      products: [],
     };
   }
 
@@ -22,7 +23,20 @@ export default class App extends React.Component {
           todos: response.data.data,
         });
       })
-      .catch((e) => console.log("Error : ", e));
+      .catch((error) => {
+        console.error("Error fetching comments: ", error);
+      });
+  
+    axios
+      .get("/api/products")
+      .then((response) => {
+        this.setState({
+          products: response.data.data,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching products: ", error);
+      });
   }
 
   handleAddTodo = (value) => {
@@ -42,6 +56,8 @@ export default class App extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-sm-8 col-md-8 offset-md-2">
+              <h1>Products publications</h1>
+              <ProductList products = {this.state.products } />  
               <h1>Comentarios</h1>
               <div className="todo-app">
                 <AddTodo handleAddTodo={this.handleAddTodo} />

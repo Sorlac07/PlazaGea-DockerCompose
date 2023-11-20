@@ -4,7 +4,7 @@ services:
       context: frontend
       target: development
     ports:
-      - 80:3000  # Cambia 3000:3000 a 80:3000
+      - 80:3000  # Cambiado de 3000:3000 a 80:3000
     stdin_open: true
     volumes:
       - ./frontend:/usr/src/app
@@ -12,7 +12,7 @@ services:
     restart: always
     networks:
       - react-express
-    depends_on:
+    depends_on: 
       - backend
 
   backend:

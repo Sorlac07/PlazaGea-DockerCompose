@@ -21,13 +21,8 @@ export default class TodoList extends React.Component {
         {todos.map((todo, i) => (
           <li
             className={
-              "list-group-item cursor-pointer " +
-              (i === this.state.activeIndex ? "active" : "")
+              "list-group-item cursor-pointer"
             }
-            key={i}
-            onClick={() => {
-              this.handleActive(i);
-            }}
           >
             {todo.text}
           </li>
